@@ -4,6 +4,7 @@ from enum import Enum
 from aiohttp import web
 import sqlalchemy as sa
 
+# TODO import apispec
 from aiohttp_security import permits
 
 class RESTError(web.HTTPError):
