@@ -66,4 +66,5 @@ app = web.Application()
 app.add_routes(MyView.get_routes('/test'))
 # import ipdb
 # ipdb.set_trace()
+aiohttp_autoreload.start()
 web.run_app(app)

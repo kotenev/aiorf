@@ -25,13 +25,10 @@ class ModelSchemaMeta(SchemaMeta):
         model_fields = {}
         if not attributedict['Meta'].model:
             raise AssertionError('Meta.model is required')
-        print(attributedict['Meta'].model)
-        print(attributedict['Meta'].model._meta.fields)
         for name, field in attributedict['Meta'].model._meta.fields.items():
             for dbtype, schematype in translation_table.items():
                 if not hasattr(attributedict['Meta'], 'fields') or name in attributedict['Meta'].fields:
                     if isinstance(field, dbtype):
-                        print(field)
                         params = {}
                         if isinstance(field, peewee.PrimaryKeyField):
                             params['dump_only'] = True
@@ -40,6 +37,7 @@ class ModelSchemaMeta(SchemaMeta):
                         params['allow_none'] = field.null
                         params['default'] = field.default
                         model_fields[name] = schematype(**params)
+                        break
         new_attributedict = {}
         new_attributedict.update(model_fields)
         new_attributedict.update(attributedict)

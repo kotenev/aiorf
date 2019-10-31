@@ -18,6 +18,7 @@ class GenericViewSet(GenericAPIView):
     def get_routes(cls, path):
         def wrap(klass, method):
             async def wrapped(request):
+                print(request.match_info.keys())
                 r = klass(request)
                 return await getattr(r, method)()
             return wrapped
